@@ -50,7 +50,7 @@
 
 			// color palette
 			var cp = {
-				history: ["#000000"], // black selected by default
+				history: ["red"], // black selected by default
 				options: [],
 				$container: $('#color-palette')
 			}
@@ -60,12 +60,28 @@
 			function myGradientInteraction(){
 				var tool = new paper.Tool();
 
+        var rectangle = new paper.Rectangle(new paper.Point(225,275), new paper.Point(500, 400));
+        var path = new paper.Path.Rectangle(rectangle);
+        
+        
+        path.fillColor = 'red';
+
+
 				tool.onMouseDown = function (event) {
 
 				}
 
 				tool.onMouseUp = function (event) {
-					
+					var color1 = cp.history[cp.history.length-2];
+          var color2 = cp.history[cp.history.length-1];
+				  path.fillColor = {
+              gradient: {
+                  stops: [color1, color2]
+                  
+              },
+              origin: event.downPoint,
+              destination: event.point
+          };
 				}
 			}
 
